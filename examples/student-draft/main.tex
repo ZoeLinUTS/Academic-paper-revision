@@ -1,0 +1,151 @@
+% =====================================================================
+% SYNTHETIC SAMPLE DRAFT — for demonstrating the academic-paper-revision skill.
+% This is a fictional, made-up paper. Authors, institution, dataset, and all
+% numbers are invented and carry no IP. It intentionally contains the classic
+% "student-draft" problems the skill is meant to fix:
+%   - RQ1/RQ2/RQ3 scaffolding instead of prose contributions
+%   - generic section headings ("Approach", "Experiment 1")
+%   - chronological (dated-list) related work
+%   - zero equations though the scoring rule is central
+%   - a \ref to a figure that has no \label (renders as ??)
+%   - loose, hedgy prose that runs over the page limit
+% Target venue for the demo: a generic ACL-family conference.
+% =====================================================================
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{url}
+
+\title{Punctuation-Aware Tokenization for Sentiment Classification of Product Reviews}
+\author{Jane Doe \and John Roe \\ Department of Sample Studies, University of Nowhere \\ \texttt{\{jdoe, jroe\}@example.edu}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Sentiment classification is a very important task in natural language
+processing and a lot of people have worked on it. In this paper we look at
+whether keeping punctuation during tokenization helps a simple classifier do
+better on product reviews. We built a small pipeline and ran some experiments
+on a dataset of reviews that we collected. Our results show that keeping
+punctuation seems to help a little bit, and we think this is interesting and
+could be useful for future work. We also tried a few different classifiers and
+report what we found.
+\end{abstract}
+
+\section{Introduction}
+
+Sentiment analysis is the task of deciding whether a piece of text is positive
+or negative. It is used in many places like product reviews, social media, and
+customer feedback. Many researchers have studied this problem over the years
+and there are many methods. Most methods start by tokenizing the text, which
+means splitting it into words or tokens. Usually punctuation is thrown away
+during tokenization because it is thought to be noise.
+
+In this paper we ask whether that is a good idea. Maybe punctuation carries
+sentiment information. For example, an exclamation mark might mean the reviewer
+is excited, and lots of question marks might mean they are confused or annoyed.
+So we decided to study this.
+
+We investigate the following research questions:
+\begin{itemize}
+    \item \textbf{RQ1:} Does keeping punctuation during tokenization improve
+    sentiment classification accuracy?
+    \item \textbf{RQ2:} Which punctuation marks are the most useful for the
+    classifier?
+    \item \textbf{RQ3:} Does the effect depend on which classifier we use?
+\end{itemize}
+
+To answer these questions we built a pipeline (see Figure~\ref{fig:pipeline})
+and ran experiments. The rest of the paper is organized as follows. Section 2
+talks about related work. Section 3 describes our approach. Section 4 and
+Section 5 present our experiments. Section 6 concludes.
+
+\section{Related Work}
+
+In 2013, Mikolov et al. introduced word2vec which is a way to represent words
+as vectors. In 2014, Pennington et al. introduced GloVe which is another way to
+get word vectors. In 2015, some people used LSTMs for sentiment analysis and got
+good results. In 2018, Devlin et al. introduced BERT which is a transformer
+model and it became very popular for many NLP tasks including sentiment
+analysis. After that, in 2019 and 2020, many people fine-tuned BERT and other
+transformers for sentiment classification and kept improving the numbers.
+There has also been work on tokenization, for example byte-pair encoding and
+WordPiece, but most of this work is about handling rare words and not about
+punctuation. So our work is different because we focus on punctuation.
+
+\section{Approach}
+
+Our approach has a few steps. First we take the raw review text. Then we
+tokenize it. We have two settings: one where we remove punctuation (the
+baseline) and one where we keep punctuation as separate tokens (our method).
+Then we turn the tokens into features. We use a bag-of-words representation
+where each feature is the count of a token. Then we train a classifier on these
+features. We compute a score for each review and if the score is above a
+threshold we call it positive, otherwise negative. We picked the threshold by
+trying a few values and choosing the one that worked best on the training set.
+
+We tried three classifiers: logistic regression, a naive Bayes classifier, and
+a small feed-forward neural network. We used default settings for most things.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{The pipeline of our approach. Raw text is tokenized, turned into
+    bag-of-words features, and classified.}
+\end{figure}
+
+\section{Experiment 1}
+
+We collected a dataset of 5,000 product reviews from an online store. Each
+review has a star rating from 1 to 5. We treated 4 and 5 stars as positive and
+1 and 2 stars as negative, and we threw away 3-star reviews because they are
+ambiguous. This gave us about 4,200 reviews. We split them 80/20 into training
+and test.
+
+We ran the baseline (no punctuation) and our method (with punctuation) using
+logistic regression. The results are in Table~\ref{tab:main}. Keeping
+punctuation improved accuracy from 0.812 to 0.831. We think this shows that
+punctuation is helpful.
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{lc}
+        \toprule
+        Setting & Accuracy \\
+        \midrule
+        Baseline (no punctuation) & 0.812 \\
+        Ours (with punctuation) & 0.831 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Main results with logistic regression.}
+    \label{tab:main}
+\end{table}
+
+\section{Experiment 2}
+
+To answer RQ2 and RQ3 we did more experiments. For RQ2 we looked at which
+punctuation marks helped the most. We found that exclamation marks and question
+marks were the most useful, while commas and periods did not help much. For RQ3
+we tried the other two classifiers. Naive Bayes went from 0.788 to 0.795 and the
+neural network went from 0.822 to 0.834. So the effect seems to hold across
+classifiers, although the size of the improvement is different.
+
+\section{Conclusion}
+
+In this paper we studied whether keeping punctuation during tokenization helps
+sentiment classification. We found that it helps a little bit across three
+classifiers, and that exclamation marks and question marks are the most useful.
+In future work we would like to try more datasets, more languages, and bigger
+models. We think punctuation-aware tokenization is a promising direction.
+
+\begin{thebibliography}{9}
+\bibitem{mikolov2013} Mikolov, T. et al. (2013). Efficient Estimation of Word Representations in Vector Space.
+\bibitem{pennington2014} Pennington, J. et al. (2014). GloVe: Global Vectors for Word Representation.
+\bibitem{devlin2018} Devlin, J. et al. (2018). BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding.
+\end{thebibliography}
+
+\end{document}

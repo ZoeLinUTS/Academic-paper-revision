@@ -1,0 +1,183 @@
+% =====================================================================
+% SYNTHETIC SAMPLE DRAFT (OVER-LENGTH) — for demonstrating the
+% academic-paper-revision skill's page-fit / trimming step (Step 4).
+% Fictional paper: authors, dataset, and numbers are invented, no IP.
+% Target venue for the demo: an ACL-family SHORT paper (4-page body limit,
+% excluding References / Limitations / Ethics). This draft intentionally runs
+% ~5-6 pages so the skill must trim. The trimming levers are deliberate:
+%   - two overlapping Introduction paragraphs (redundant motivation)
+%   - a verbose, repetitive Related Work
+%   - a long inline WORKED EXAMPLE that belongs in an appendix
+%   - Discussion paragraphs that restate the results
+%   - hedgy filler sentences throughout
+% Unlike the student-draft sample, this one is otherwise fairly complete:
+% prose contributions (no RQ scaffolding), one equation, cited .bib.
+% =====================================================================
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{url}
+
+\title{A Rule-Based Detector for Passive Voice in Academic Abstracts}
+\author{Alex Sample \and Robin Placeholder \\ School of Made-Up Studies, Institute of Nowhere \\ \texttt{\{asample, rplaceholder\}@example.edu}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Passive voice is common in academic writing and is often discouraged by style
+guides. We present a lightweight, rule-based detector that flags passive-voice
+clauses in English abstracts using part-of-speech patterns over auxiliary and
+participle sequences. On a hand-labelled set of 600 sentences the detector
+reaches an F1 of 0.91, competitive with a supervised classifier that requires
+training data, while remaining fully interpretable and dependency-free. We
+release the rule set and the annotation guidelines. The method is intended as a
+transparent writing-support component rather than a state-of-the-art parser.
+\end{abstract}
+
+\section{Introduction}
+
+Academic style guides frequently advise authors to prefer active over passive
+voice, on the grounds that the active voice is more direct and easier to read.
+Tools that can automatically flag passive constructions are therefore useful in
+writing-support settings, where an author wants quick, interpretable feedback on
+a draft. Most existing writing assistants either rely on opaque machine-learning
+models or on shallow heuristics that miss many constructions, and there is a gap
+for a method that is both transparent and reasonably accurate.
+
+Automatically detecting passive voice is helpful because writers often want fast
+feedback while drafting, and an interpretable signal is easier to trust and act
+on than an opaque score. Many current writing tools use black-box models or very
+shallow rules, so a method that is simultaneously transparent and accurate would
+fill a real gap. In this paper we pursue exactly that goal. (This paragraph and
+the one above make the same point twice and should be merged.)
+
+We present a rule-based detector that operates over part-of-speech tags and a
+small set of clause-level patterns. Our contributions are: (i) a compact,
+documented rule set for English passive-voice detection that needs no training
+data; (ii) a hand-labelled evaluation set of 600 sentences with annotation
+guidelines; and (iii) an evaluation showing the rules are competitive with a
+supervised baseline while remaining fully interpretable.
+
+\section{Related Work}
+
+Passive-voice detection has been approached in several ways over the years. Early
+grammar checkers used simple pattern matching on auxiliary verbs. Later work
+built supervised classifiers on top of syntactic features, which improved recall
+but required labelled data and a parser. More recent systems use neural sequence
+labellers, which perform well but are opaque and data-hungry. There is also a
+large body of work on readability and writing quality more generally, which
+sometimes includes passive voice as one of many features. Style guides such as
+common manuals of academic writing recommend limiting passive voice, and several
+commercial writing assistants implement passive detection as a feature, although
+their internal methods are usually undocumented. Our approach differs from the
+supervised and neural lines of work in that it needs no training data and is
+fully interpretable, and it differs from the shallow grammar-checker heuristics
+in that it covers a broader set of clause patterns. In short, prior work is
+either accurate but opaque and data-hungry, or transparent but shallow; we aim
+for the transparent-and-accurate middle. (This section repeats the
+same accurate-vs-transparent contrast three times and can be tightened to two
+short paragraphs.)
+
+\section{Method}
+
+Given a sentence, we run a part-of-speech tagger and then scan for a passive
+pattern: a form of the auxiliary \emph{to be} (or \emph{to get}) followed,
+within a short window, by a past participle, optionally preceded by adverbs and
+optionally followed by a \emph{by}-phrase. We score each candidate clause and
+flag the sentence as passive if any clause scores above a threshold. Formally,
+for a clause $x$ with auxiliary indicator $\mathrm{aux}(x)$ and participle
+indicator $\mathrm{part}(x)$ within window $w$, the clause score is
+
+\begin{equation}
+    \mathrm{score}(x) = \mathrm{aux}(x)\cdot \mathrm{part}(x, w)\cdot
+    \big(1 + \lambda\,\mathrm{by}(x)\big),
+    \label{eq:score}
+\end{equation}
+
+where $\mathrm{by}(x)\in\{0,1\}$ marks a following \emph{by}-agent and $\lambda$
+up-weights clauses with an explicit agent. The sentence is flagged when
+$\max_x \mathrm{score}(x)$ exceeds a fixed threshold, chosen on a small
+development set separate from the test set.
+
+\paragraph{Worked example.}
+Consider the sentence ``The results were carefully analysed by three independent
+reviewers before the final decision was made.'' The tagger yields the sequence
+determiner, noun, auxiliary (\emph{were}), adverb (\emph{carefully}), past
+participle (\emph{analysed}), preposition (\emph{by}), and so on. The first
+clause matches the pattern: \emph{were} is an auxiliary form of \emph{to be},
+\emph{analysed} is a past participle within the window, \emph{carefully} is an
+intervening adverb that the pattern tolerates, and \emph{by three independent
+reviewers} supplies a \emph{by}-agent, so $\mathrm{by}(x)=1$ and the clause
+receives the agent up-weight. The second clause, ``the final decision was
+made,'' also matches: \emph{was} is the auxiliary and \emph{made} the participle,
+with no \emph{by}-agent, so $\mathrm{by}(x)=0$. Because at least one clause
+exceeds the threshold, the whole sentence is flagged as passive, and because two
+clauses match, the detector can additionally report a passive-clause count of
+two. This step-by-step walk-through is useful for readers new to the pattern but
+is long; in a 4-page short paper it should move to an appendix with only a
+one-sentence pointer left in the body.
+
+\section{Experiments}
+
+We built an evaluation set of 600 English sentences sampled from abstracts across
+six fields, and two annotators labelled each sentence as active or passive with
+an inter-annotator agreement of $\kappa = 0.88$; disagreements were adjudicated.
+We compare our rules against a supervised logistic-regression classifier trained
+on 2{,}000 separately labelled sentences with part-of-speech n-gram features.
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{lccc}
+        \toprule
+        Method & Precision & Recall & F1 \\
+        \midrule
+        Shallow aux-only heuristic & 0.94 & 0.72 & 0.82 \\
+        Supervised LR (needs training) & 0.90 & 0.93 & 0.92 \\
+        Ours (rules, no training) & 0.92 & 0.90 & 0.91 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Passive-voice detection on 600 hand-labelled sentences. Intervals
+    omitted for space.}
+    \label{tab:results}
+\end{table}
+
+Table~\ref{tab:results} shows that our rule set reaches F1 0.91, within one point
+of the supervised classifier and well above the aux-only heuristic, while
+requiring no training data. The gap to the supervised model comes mostly from
+recall on reduced passives without an overt auxiliary, which our patterns do not
+cover.
+
+\section{Discussion}
+
+Our results indicate that a compact, interpretable rule set can match a
+supervised classifier on this task while avoiding any training-data requirement.
+This matters for writing-support tools, where transparency and the ability to
+explain a flag to the author are valuable. The main errors are reduced passives
+and a handful of tagger mistakes on rare participles.
+
+As the numbers show, the rule-based detector performs almost as well as the
+supervised model without needing labelled training data, which is convenient for
+deployment and makes the flags easy to explain. Reduced passives and occasional
+tagging errors account for most of the remaining mistakes. (This paragraph
+restates the one above and should be merged.)
+
+\section{Conclusion}
+
+We presented a transparent, training-free rule set for passive-voice detection in
+academic abstracts that is competitive with a supervised baseline. Because it is
+interpretable and dependency-light, it is well suited to writing-support tools.
+Future work includes covering reduced passives and extending the rules to other
+languages.
+
+\begin{thebibliography}{9}
+\bibitem{manning2014} Manning, C. et al. (2014). The Stanford CoreNLP Natural Language Processing Toolkit.
+\bibitem{honnibal2020} Honnibal, M. et al. (2020). spaCy: Industrial-Strength Natural Language Processing.
+\bibitem{biber1999} Biber, D. et al. (1999). Longman Grammar of Spoken and Written English.
+\end{thebibliography}
+
+\end{document}
