@@ -7,9 +7,9 @@
 [![sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-ff69b4)](https://github.com/sponsors/ZoeLinUTS)
 
 <!-- i18n language switcher -->
-**English** | [中文](docs/i18n/README.zh-CN.md)
-<!-- Add more languages here as translations land, e.g.:
-     | [한국어](docs/i18n/README.ko.md) | [日本語](docs/i18n/README.ja.md) | ... -->
+**English** | [中文](docs/i18n/README.zh-CN.md) | [日本語](docs/i18n/README.ja.md) | [한국어](docs/i18n/README.ko.md) | [Español](docs/i18n/README.es.md) | [Français](docs/i18n/README.fr.md) | [Deutsch](docs/i18n/README.de.md) | [Português](docs/i18n/README.pt.md)
+<!-- Translations are community-maintained; English is the source of truth and may be ahead. -->
+<!-- To add a language: create docs/i18n/README.<lang>.md and append it to every switcher row. -->
 
 ---
 

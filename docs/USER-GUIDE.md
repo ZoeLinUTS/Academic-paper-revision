@@ -1,5 +1,9 @@
 # User Guide
 
+> **English** | [中文](i18n/USER-GUIDE.zh-CN.md) | [日本語](i18n/USER-GUIDE.ja.md) | [한국어](i18n/USER-GUIDE.ko.md) | [Español](i18n/USER-GUIDE.es.md) | [Français](i18n/USER-GUIDE.fr.md) | [Deutsch](i18n/USER-GUIDE.de.md) | [Português](i18n/USER-GUIDE.pt.md)
+>
+> <!-- Translations are community-maintained; English is the source of truth and may be ahead. -->
+
 How to use the `academic-paper-revision` skill, what to give it, what it returns,
 and how the two operating modes differ.
 
