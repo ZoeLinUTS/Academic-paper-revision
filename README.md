@@ -19,9 +19,16 @@ draft (LaTeX) into a submission that reads like an *accepted* paper at a
 studies the venue's accepted papers, then rewrites — instead of applying generic
 "good writing" advice that is often wrong for a given venue.
 
-> **Status:** the skill and a synthetic sample draft are ready to use today. A
-> hosted, read-only PDF reviewer (Vercel / GitHub Pages) is on the
-> [roadmap](#roadmap) — see below.
+## ✅ Try it online — no setup, no API key needed
+
+A free hosted **review-only** version of this skill runs at
+**[zoelin.dev/tools/paper-revision](https://zoelin.dev/tools/paper-revision)**:
+upload a PDF or LaTeX source, pick your target venue, and get the orientation
+briefing + severity-ordered findings list back in your browser — a free hosted
+model is included, or bring your own API key for higher-quality output. It
+never edits or stores your file; for the **full revision** mode (Claude
+actually rewrites your `.tex`), use the skill directly with Claude Code as
+described below.
 
 ## What's in this repo
 
@@ -63,7 +70,7 @@ examples/over-length/               Synthetic over-length draft (exercises trimm
 2. **Review-only (no edits).** Claude reads the draft and returns an *overview
    and comments only* — research topic/scope, core contribution, candid novelty,
    problems, and concrete suggestions — without changing any files. This is the
-   mode the planned web app will expose.
+   mode the [hosted web app](https://zoelin.dev/tools/paper-revision) exposes.
 
 Either mode works in **any language** you like: ask your questions and receive the
 overview, comments, and summaries in Chinese, Spanish, Arabic, or any other language.
@@ -130,15 +137,6 @@ The skill is plain Markdown instructions — only the YAML front-matter at the t
 paste the `SKILL.md` body (everything after the closing `---`) as the system prompt and
 attach `references/venue-conventions.md` as context. Details in
 [the guide](docs/USER-GUIDE.md#9-using-it-with-other-ai-models-codex-deepseek-gemini-).
-
-## Roadmap
-
-A hosted **read-only PDF reviewer**: the user uploads a PDF draft and receives an
-overview and comments — research topic and scope, the problems it tackles, the
-core contribution, a candid novelty read, and improvement suggestions — with
-**no LaTeX editing**. Planned as a small web front-end (Vercel or GitHub Pages)
-over the review-only mode described above. This is a separate task tracked in the
-same repo; the analysis logic already lives in the skill.
 
 ## A note on inputs
 
