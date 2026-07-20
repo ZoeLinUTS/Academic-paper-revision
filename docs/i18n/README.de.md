@@ -18,9 +18,16 @@ auf einer **bestimmten Ziel-Konferenz** liest. Er ist *konferenzzuerst*: Er fixi
 Regeln des Ziels, studiert die angenommenen Arbeiten der Konferenz und schreibt dann um — statt
 generische „gute Schreibratschläge" anzuwenden, die für eine bestimmte Konferenz oft falsch sind.
 
-> **Status:** Der Skill und ein synthetischer Beispielentwurf sind heute einsatzbereit. Ein
-> gehosteter, schreibgeschützter PDF-Reviewer (Vercel / GitHub Pages) steht auf der
-> [Roadmap](#roadmap).
+## ✅ Jetzt online ausprobieren — keine Installation, kein API-Key nötig
+
+Eine kostenlose gehostete **Nur-Review**-Version dieses Skills läuft unter
+**[zoelin.dev/tools/paper-revision](https://zoelin.dev/tools/paper-revision)**:
+PDF oder LaTeX-Quelle hochladen, Ziel-Konferenz wählen, und das Orientierungsbriefing
+plus die nach Schweregrad sortierte Befundliste direkt im Browser erhalten — ein
+kostenloses gehostetes Modell ist inklusive, oder eigener API-Key für höhere
+Ausgabequalität. Die Datei wird nie bearbeitet oder gespeichert; für den Modus
+**Vollständige Überarbeitung** (bei dem Claude Ihr `.tex` tatsächlich umschreibt)
+nutzen Sie den Skill direkt mit Claude Code, wie unten beschrieben.
 
 ## Was in diesem Repository ist
 
@@ -60,8 +67,8 @@ examples/over-length/               Synthetischer zu langer Entwurf (Kürzungsü
    Upload-Zip zurück. **Er erfindet niemals Ergebniszahlen.**
 2. **Nur-Review (keine Bearbeitung).** Claude liest den Entwurf und liefert *nur Überblick und
    Kommentare*: Forschungsthema/-umfang, Kernbeitrag, offene Neuheitsbewertung, Probleme und
-   konkrete Vorschläge — ohne eine Datei zu ändern. Das ist der Modus, den die geplante Web-App
-   bereitstellen wird.
+   konkrete Vorschläge — ohne eine Datei zu ändern. Das ist der Modus, den die
+   [gehostete Web-App](https://zoelin.dev/tools/paper-revision) bereitstellt.
 
 Beide Modi funktionieren in **jeder Sprache**: Stellen Sie Ihre Fragen und erhalten Sie Überblick,
 Kommentare und Zusammenfassungen auf Chinesisch, Spanisch, Arabisch oder jeder anderen Sprache.
@@ -96,14 +103,6 @@ examples/over-length/main.tex     über dem Seitenlimit; übt das Kürzen
 - **`over-length`** zielt auf das ACL-Kurzpapier-Limit (4 Seiten), umfasst aber ~5-6 Seiten; es ist
   ansonsten ausgefeilt und übt so den **Kürzungsschritt** (redundante Absätze zusammenführen, ein
   ausgearbeitetes Beispiel in einen Anhang verschieben).
-
-## Roadmap
-
-Ein gehosteter **schreibgeschützter PDF-Reviewer**: Der Nutzer lädt einen PDF-Entwurf hoch und
-erhält Überblick und Kommentare — Forschungsthema und -umfang, behandelte Probleme, Kernbeitrag,
-offene Neuheitsbewertung und Verbesserungsvorschläge — **ohne jede LaTeX-Bearbeitung**. Geplant als
-kleines Web-Frontend (Vercel oder GitHub Pages) über dem oben beschriebenen Nur-Review-Modus. Dies
-ist eine separate, im selben Repository verfolgte Aufgabe; die Analyselogik steckt bereits im Skill.
 
 ## Ein Hinweis zu den Eingaben
 

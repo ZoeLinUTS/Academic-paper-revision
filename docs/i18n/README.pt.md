@@ -18,8 +18,16 @@ específico**. Ele é *evento primeiro*: primeiro fixa as regras do alvo, estuda
 do evento e então reescreve — em vez de aplicar conselhos genéricos de "boa escrita" que muitas
 vezes são errados para um dado evento.
 
-> **Status:** o skill e um rascunho de exemplo sintético estão prontos para uso hoje. Um revisor de
-> PDF somente leitura hospedado (Vercel / GitHub Pages) está no [roteiro](#roteiro).
+## ✅ Experimente online agora — sem instalação, sem chave de API
+
+Uma versão gratuita hospedada, **somente revisão**, deste skill roda em
+**[zoelin.dev/tools/paper-revision](https://zoelin.dev/tools/paper-revision)**:
+envie um PDF ou uma fonte LaTeX, escolha seu evento-alvo, e receba o briefing de
+orientação mais a lista de achados ordenada por gravidade direto no seu navegador
+— um modelo hospedado gratuito está incluído, ou traga sua própria chave de API
+para uma saída de qualidade superior. Nunca edita nem armazena seu arquivo; para
+o modo de **revisão completa** (onde o Claude realmente reescreve seu `.tex`),
+use o skill diretamente com o Claude Code como descrito abaixo.
 
 ## O que há neste repositório
 
@@ -58,8 +66,8 @@ examples/over-length/               Rascunho sintético acima do limite (exercit
    **Ele nunca inventa números de resultados.**
 2. **Somente revisão (sem edições).** O Claude lê o rascunho e devolve *apenas panorama e
    comentários*: tema/escopo da pesquisa, contribuição central, novidade franca, problemas e
-   sugestões concretas — sem alterar nenhum arquivo. Esse é o modo que o aplicativo web planejado
-   irá expor.
+   sugestões concretas — sem alterar nenhum arquivo. Esse é o modo que o
+   [aplicativo web hospedado](https://zoelin.dev/tools/paper-revision) expõe.
 
 Ambos os modos funcionam em **qualquer idioma**: faça suas perguntas e receba o panorama, os
 comentários e os resumos em chinês, espanhol, árabe ou qualquer outro idioma. Apenas a *conversa*
@@ -91,14 +99,6 @@ examples/over-length/main.tex     acima do limite de páginas; exercita o corte
 - **`over-length`** mira o limite de artigo curto da ACL (4 páginas) mas ocupa ~5-6 páginas; é de
   resto polido, então exercita o **passo de corte** (fundir parágrafos redundantes, mover um exemplo
   trabalhado para um apêndice).
-
-## Roteiro
-
-Um **revisor de PDF somente leitura** hospedado: o usuário envia um rascunho em PDF e recebe um
-panorama e comentários — tema e escopo da pesquisa, os problemas que aborda, a contribuição central,
-uma leitura franca da novidade e sugestões de melhoria — **sem qualquer edição de LaTeX**. Planejado
-como um pequeno front-end web (Vercel ou GitHub Pages) sobre o modo somente revisão descrito acima. É
-uma tarefa à parte rastreada no mesmo repositório; a lógica de análise já vive no skill.
 
 ## Uma nota sobre as entradas
 

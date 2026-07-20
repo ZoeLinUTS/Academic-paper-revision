@@ -18,9 +18,17 @@ publication cible précis**. Il est *centré sur le lieu* : il fixe d'abord les 
 étudie les articles acceptés du lieu, puis réécrit — au lieu d'appliquer des conseils génériques
 de « bonne écriture » souvent inadaptés à un lieu donné.
 
-> **Statut :** le skill et un brouillon d'exemple synthétique sont prêts à l'emploi dès
-> aujourd'hui. Un relecteur de PDF en lecture seule hébergé (Vercel / GitHub Pages) figure sur la
-> [feuille de route](#feuille-de-route).
+## ✅ Essayez-le en ligne dès maintenant — aucune installation, aucune clé API requise
+
+Une version gratuite hébergée, **relecture seule**, de ce skill fonctionne sur
+**[zoelin.dev/tools/paper-revision](https://zoelin.dev/tools/paper-revision)** :
+téléversez un PDF ou une source LaTeX, choisissez votre lieu cible, et recevez le
+briefing d'orientation ainsi que la liste des constats classée par gravité
+directement dans votre navigateur — un modèle hébergé gratuit est inclus, ou
+apportez votre propre clé API pour une sortie de meilleure qualité. Il n'édite
+ni ne stocke jamais votre fichier ; pour le mode **révision complète** (où
+Claude réécrit réellement votre `.tex`), utilisez le skill directement avec
+Claude Code comme décrit ci-dessous.
 
 ## Contenu de ce dépôt
 
@@ -60,8 +68,8 @@ examples/over-length/               Brouillon synthétique au-dessus de la limit
    reconstruit. **Il n'invente jamais de chiffres de résultats.**
 2. **Relecture seule (sans édition).** Claude lit le brouillon et renvoie *un aperçu et des
    commentaires uniquement* : sujet/portée de la recherche, contribution centrale, nouveauté
-   franche, problèmes et suggestions concrètes, sans modifier aucun fichier. C'est le mode que
-   l'application web prévue exposera.
+   franche, problèmes et suggestions concrètes, sans modifier aucun fichier. C'est le mode
+   qu'expose l'[application web hébergée](https://zoelin.dev/tools/paper-revision).
 
 Les deux modes fonctionnent dans **n'importe quelle langue** : posez vos questions et recevez
 l'aperçu, les commentaires et les résumés en chinois, espagnol, arabe ou toute autre langue. Seule
@@ -95,15 +103,6 @@ examples/over-length/main.tex     au-dessus de la limite de pages ; exercice d'�
 - **`over-length`** vise la limite d'article court ACL (4 pages) mais fait ~5-6 pages ; il est par
   ailleurs soigné, donc il exerce l'**étape d'élagage** (fusion de paragraphes redondants,
   déplacement d'un exemple détaillé en annexe).
-
-## Feuille de route
-
-Un **relecteur de PDF en lecture seule** hébergé : l'utilisateur téléverse un brouillon PDF et
-reçoit un aperçu et des commentaires — sujet et portée de la recherche, problèmes traités,
-contribution centrale, lecture franche de la nouveauté et suggestions d'amélioration — **sans
-aucune édition LaTeX**. Prévu comme un petit front-end web (Vercel ou GitHub Pages) au-dessus du
-mode relecture seule décrit ci-dessus. C'est une tâche distincte suivie dans le même dépôt ; la
-logique d'analyse vit déjà dans le skill.
 
 ## Une note sur les entrées
 

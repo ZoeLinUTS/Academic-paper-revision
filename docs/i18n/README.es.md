@@ -18,9 +18,16 @@ un **congreso destino específico**. Es *primero el congreso*: primero fija las 
 destino, estudia los artículos aceptados del congreso y luego reescribe, en lugar de aplicar
 consejos genéricos de "buena redacción" que a menudo son incorrectos para un congreso dado.
 
-> **Estado:** el skill y un borrador de ejemplo sintético están listos para usar hoy. Un
-> revisor de PDF de solo lectura alojado (Vercel / GitHub Pages) está en la [hoja de
-> ruta](#hoja-de-ruta).
+## ✅ Pruébalo en línea ahora — sin instalación, sin clave de API
+
+Una versión gratuita alojada, **solo revisión**, de este skill funciona en
+**[zoelin.dev/tools/paper-revision](https://zoelin.dev/tools/paper-revision)**:
+sube un PDF o una fuente LaTeX, elige tu congreso destino y recibe la sesión de
+orientación más la lista de hallazgos ordenada por severidad directamente en tu
+navegador — incluye un modelo alojado gratuito, o usa tu propia clave de API
+para una salida de mayor calidad. Nunca edita ni almacena tu archivo; para el
+modo de **revisión completa** (donde Claude reescribe tu `.tex`), usa el skill
+directamente con Claude Code como se describe más abajo.
 
 ## Qué hay en este repositorio
 
@@ -60,8 +67,8 @@ examples/over-length/               Borrador sintético por encima del límite (
    **Nunca inventa números de resultados.**
 2. **Solo revisión (sin ediciones).** Claude lee el borrador y devuelve *solo panorama y
    comentarios*: tema/alcance de la investigación, contribución central, novedad franca,
-   problemas y sugerencias concretas, sin cambiar ningún archivo. Este es el modo que expondrá
-   la aplicación web planeada.
+   problemas y sugerencias concretas, sin cambiar ningún archivo. Este es el modo que expone
+   la [aplicación web alojada](https://zoelin.dev/tools/paper-revision).
 
 Ambos modos funcionan en **cualquier idioma**: haz tus preguntas y recibe el panorama, los
 comentarios y los resúmenes en chino, español, árabe o cualquier otro idioma. Solo la
@@ -94,15 +101,6 @@ examples/over-length/main.tex     por encima del límite de páginas; ejercita e
 - **`over-length`** apunta al límite de artículo corto de ACL (4 páginas) pero ocupa ~5-6 páginas;
   por lo demás está pulido, así que ejercita el **paso de recorte** (fusionar párrafos redundantes,
   mover un ejemplo desarrollado a un apéndice).
-
-## Hoja de ruta
-
-Un **revisor de PDF de solo lectura** alojado: el usuario sube un borrador en PDF y recibe un
-panorama y comentarios —tema y alcance de la investigación, los problemas que aborda, la
-contribución central, una lectura franca de la novedad y sugerencias de mejora— **sin edición de
-LaTeX**. Planeado como un pequeño front-end web (Vercel o GitHub Pages) sobre el modo solo revisión
-descrito arriba. Es una tarea aparte rastreada en el mismo repositorio; la lógica de análisis ya
-vive en el skill.
 
 ## Una nota sobre las entradas
 
